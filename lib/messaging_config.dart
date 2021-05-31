@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'dart:ui';
+import 'dart:convert';
 
 class HexColor extends Color {
   static int _getColorFromHex(String hexColor) {
