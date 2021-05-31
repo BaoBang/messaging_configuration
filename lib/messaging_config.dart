@@ -112,9 +112,9 @@ class MessagingConfig {
   }
 
   Future<dynamic> inAppMessageHandlerRemoteMessage(RemoteMessage message) async {
-    if (message.title != null && message.message != null) {
+    if (message['title'] != null && message['message'] != null) {
       showAlertNotificationForeground(
-          message.title, message.message, message.data);
+          message['title'], message['message'], message['data']);
       try {
         if (isVibrate) {
           _vibrate.invokeMethod('vibrate');
