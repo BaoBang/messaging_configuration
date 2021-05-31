@@ -112,9 +112,9 @@ class MessagingConfig {
   }
 
   Future<dynamic> inAppMessageHandlerRemoteMessage(RemoteMessage message) async {
-    if (message.notification.title != null && message.notification.body != null) {
+    if (message.title != null && message.message != null) {
       showAlertNotificationForeground(
-          message.notification.title, message.notification.body, message.data);
+          message.title, message.message, message.data);
       try {
         if (isVibrate) {
           _vibrate.invokeMethod('vibrate');
@@ -140,9 +140,12 @@ class MessagingConfig {
     if (message.containsKey("notification")) {
       notiTitle = message["notification"]["title"].toString();
       notiDes = message["notification"]["body"].toString();
-    } else {
+    } else if(message.containsKey("aps")){
       notiTitle = message["aps"]["alert"]["title"].toString();
       notiDes = message["aps"]["alert"]["body"].toString();
+    }else{
+      notiTitle = message["title"].toString();
+      notiDes = message["message"].toString();
     }
     if (notiTitle != null && notiDes != null) {
       showAlertNotificationForeground(notiTitle, notiDes, message);
