@@ -68,8 +68,8 @@ class MessagingConfig {
     } else {
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
         print(jsonEncode(message.data));
-        print(jsonEncode(message));
-        print("onMessage: $message");
+        // print(jsonEncode(message));
+        // print("onMessage: $message");
         inAppMessageHandlerRemoteMessage(message);
       });
       // FirebaseMessaging.onBackgroundMessage((RemoteMessage message) {
@@ -77,15 +77,15 @@ class MessagingConfig {
       //   return myBackgroundMessageHandler(message.data);
       // });
       FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage message){
-        print(jsonEncode(message.data));
-        print(jsonEncode(message));
-        print("getInitialMessage: $message");
+        // print(jsonEncode(message.data));
+        // print(jsonEncode(message));
+        // print("getInitialMessage: $message");
         myBackgroundMessageHandler(message.data);
       });
       FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-        print(jsonEncode(message.data));
-        print(jsonEncode(message));
-        print("onResume: $message");
+        // print(jsonEncode(message.data));
+        // print(jsonEncode(message));
+        // print("onResume: $message");
         myBackgroundMessageHandler(message.data);
       });
     }
@@ -115,7 +115,7 @@ class MessagingConfig {
   }
 
   Future<dynamic> inAppMessageHandlerRemoteMessage(RemoteMessage message) async {
-    if (message.data['title'] != null && message.data['message'] != null) {
+    if (message!= null && message.data != null && message.data['title'] != null && message.data['message'] != null) {
       showAlertNotificationForeground(
           message.data['title'], message.data['message'], message.data);
       try {
